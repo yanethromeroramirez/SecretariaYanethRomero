@@ -19,9 +19,9 @@ namespace Contacto.Controllers
 
         // POST: api/Contacto
         /// <summary>
-        /// 
+        /// Método encargado de recibir una petición POST  y almacenar un registro de contacto en la base de datos
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">ID_CONTACTO integer, CODTIPOIDENTIFICACION integer, NUMEROIDENTIFICACION string, NOMBRES string, APELLIDOS string, MENSAJE string
         /// <returns></returns>
         [ResponseType(typeof(CONTACTO))]
         public IHttpActionResult PostCONTACTO(CONTACTO model)

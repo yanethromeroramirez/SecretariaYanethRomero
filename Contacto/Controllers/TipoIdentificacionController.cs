@@ -18,9 +18,9 @@ namespace Contacto.Controllers
 
         // GET: api/TipoIdentificacion
         /// <summary>
-        /// 
+        /// Método encargado de recibir una petición GET  y listar los tipos de identificación
         /// </summary>
-        /// <returns></returns>
+        /// <returns>  IQueryable<int ID_TIPOIDENTIFICACION,  string NOMBRE></int></returns>
         public IQueryable<TIPOIDENTIFICACION> GetTIPOIDENTIFICACIONs()
         {
             return db.TIPOIDENTIFICACIONs;

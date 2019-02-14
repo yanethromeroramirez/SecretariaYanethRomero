@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<<!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Contáctenos</title>
@@ -103,7 +103,7 @@
                     dataType: 'json',
                     data: data,
                     success: function (d) {
-                        console.log("Me guardó super bien");
+                        //console.log("Me guardó super bien");
                         alert("Registro guardado satisfactoriamente");
                         document.getElementById("formcontacto").reset();
                     },
@@ -113,36 +113,6 @@
                 });
             });
         });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#postform").submit(function (e) {
-                e.preventDefault();
-                var apiurl = "http://localhost:9627/api/StudentAPI";
-                var data = {
-                    StudentID: $("#txtStudentID").val().trim(),
-                    StudentName: $("#txtStudentName").val().trim(),
-                    Email: $("#txtEmail").val().trim(),
-                    City: $("#txtCity").val().trim(),
-                    Contact: $("#txtContact").val().trim(),
-                    Country: $("#txtCountry").val().trim(),
-                }
-                $.ajax({
-                    url: apiurl,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: data,
-                    success: function (d) {
-                        alert("Saved Successfully");
-                        document.getElementById("postform").reset();
-                    },
-                    error: function () {
-                        alert("Error please try again");
-                    }
-                });
-            });
-        });
-
     </script>
 </body>
 </html>
