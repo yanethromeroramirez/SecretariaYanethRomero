@@ -1,81 +1,148 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Contáctenos</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Contáctenos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h1>Contáctenos</h1>
-</div>
-  
-<div class="container">
-<form>
-  <div class="row">
-    <div class="col-sm-4">
-      <label>Tipo de documento: </label>
+    <div class="jumbotron text-center">
+        <h1>Contáctenos</h1>
     </div>
-    <div class="col-sm-4">
-     <select id="ddlTipoDocumento"></select>
+
+    <div class="container">
+        <form name="formcontacto" id="formcontacto">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Tipo de documento: </label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="ddlTipoDocumento"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Numero de documento: </label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" placeholder="Número documento" id="txtNumeroDocumento" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Nombres: </label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" placeholder="Nombres" id="txtNombres" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Apellidos: </label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" placeholder="Apellidos" id="txtApellidos" />
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-sm-4">
+                    <label>Email: </label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="email" placeholder="Email"  id="txtEmail"/>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Mensaje: </label>
+                </div>
+                <div class="col-sm-4">
+                    <textarea name="txtMensaje" id="txtMensaje" cols="40" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label></label>
+                </div>
+                <div class="col-sm-4">
+                    <!--<input id="btnEnviar" type="button" value="Enviar" />-->
+                    <button type="submit" class="btn btn-default">Enviar</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
-   <div class="row">
-    <div class="col-sm-4">
-      <label>Numero de documento: </label>
-    </div>
-    <div class="col-sm-4">
-     <input type="text" placeholder="Número documento"/>
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-sm-4">
-      <label>Nombres: </label>
-    </div>
-    <div class="col-sm-4">
-     <input type="text" placeholder="Nombres"/>
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-sm-4">
-      <label>Apellidos: </label>
-    </div>
-    <div class="col-sm-4">
-     <input type="text" placeholder="Apellidos"/>
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-sm-4">
-      <label>Email: </label>
-    </div>
-    <div class="col-sm-4">
-     <input type="email" placeholder="Email"/>
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-sm-4">
-      <label></label>
-    </div>
-    <div class="col-sm-4">
-     <input id="btnEnviar" type="button" value="Enviar"/>
-    </div>
-  </div>
-  </form>
-</div>
-<script>
-$(document).ready(function(){
-	$.getJSON("http://10.8.122.133:777/api/TipoIdentificacion", function(result) {
-		var $dropdown = $("#ddlTipoDocumento");
-		$dropdown.append($("<option />").val('0').text('Seleccione...'));
-		   $.each(result, function() {
-			$dropdown.append($("<option />").val(this.ID_TIPOIDENTIFICACION).text(this.NOMBRE));
-		});
-	});
-});
-</script>
+    <script>
+        $(document).ready(function () {
+            //Método encargado de consumit un web service ´por GET para traer los tipos de identificación
+            $.getJSON("http://10.8.122.133:777/api/TipoIdentificacion", function (result) {
+                var $dropdown = $("#ddlTipoDocumento");
+                $dropdown.append($("<option />").val('0').text('Seleccione...'));
+                $.each(result, function () {
+                    $dropdown.append($("<option />").val(this.ID_TIPOIDENTIFICACION).text(this.NOMBRE));
+                });
+            });
+
+            //Método JSON encargdao de realizar una petición POST al servicio REST
+            $("#formcontacto").submit(function (e) {
+                e.preventDefault();
+                var apiurl = "http://10.8.122.133:777/api/Contacto";
+                var data = {
+                    CODTIPOIDENTIFICACION: $("#ddlTipoDocumento").val(),
+                    NUMERO: $("#txtNumeroDocumento").val().trim(),
+                    NOMBRES: $("#txtNombres").val().trim(),
+                    APELLIDOS: $("#txtApellidos").val().trim(),
+                    MENSAJE: $("#txtMensaje").val().trim()
+                };
+                $.ajax({
+                    url: apiurl,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (d) {
+                        console.log("Me guardó super bien");
+                        alert("Registro guardado satisfactoriamente");
+                        document.getElementById("formcontacto").reset();
+                    },
+                    error: function () {
+                        alert("Ocurrió un error");
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#postform").submit(function (e) {
+                e.preventDefault();
+                var apiurl = "http://localhost:9627/api/StudentAPI";
+                var data = {
+                    StudentID: $("#txtStudentID").val().trim(),
+                    StudentName: $("#txtStudentName").val().trim(),
+                    Email: $("#txtEmail").val().trim(),
+                    City: $("#txtCity").val().trim(),
+                    Contact: $("#txtContact").val().trim(),
+                    Country: $("#txtCountry").val().trim(),
+                }
+                $.ajax({
+                    url: apiurl,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (d) {
+                        alert("Saved Successfully");
+                        document.getElementById("postform").reset();
+                    },
+                    error: function () {
+                        alert("Error please try again");
+                    }
+                });
+            });
+        });
+
+    </script>
 </body>
 </html>
