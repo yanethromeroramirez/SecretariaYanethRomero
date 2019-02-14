@@ -18,6 +18,11 @@ namespace Contacto.Controllers
 
 
         // POST: api/Contacto
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ResponseType(typeof(CONTACTO))]
         public IHttpActionResult PostCONTACTO(CONTACTO model)
         {
@@ -25,6 +30,7 @@ namespace Contacto.Controllers
             {
                 return BadRequest(ModelState);
             }
+
 
             db.CONTACTOes.Add(model);
             db.SaveChanges();

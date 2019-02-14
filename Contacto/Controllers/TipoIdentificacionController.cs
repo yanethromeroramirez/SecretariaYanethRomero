@@ -17,10 +17,15 @@ namespace Contacto.Controllers
         private PRUEBATECNICA db = new PRUEBATECNICA();
 
         // GET: api/TipoIdentificacion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<TIPOIDENTIFICACION> GetTIPOIDENTIFICACIONs()
         {
             return db.TIPOIDENTIFICACIONs;
         }
+
 
         protected override void Dispose(bool disposing)
         {
