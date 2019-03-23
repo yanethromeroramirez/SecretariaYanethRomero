@@ -1,1 +1,1 @@
-# SecretariaYanethRomero Prueba técnica Yaneth Romero
+# Prueba técnica Yaneth Romero
